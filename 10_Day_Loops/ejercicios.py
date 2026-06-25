@@ -1,5 +1,320 @@
+# Ejercicios: Nivel 1
+# 1. Implementa iteraciones de 0 a 10 usando while y for.
+n = 0
 
-countries-data = [
+print("While:")
+while n < 11:
+    print(n)
+    n += 1
+
+print("For:")
+for n in range(11):
+    print(n)
+
+# 2. Implementa iteraciones de 10 a 0 usando while y for.
+n_inv = 10
+
+print("While:")
+while n_inv >= 0:
+    print(n_inv)
+    n_inv -= 1
+
+print("For:")
+for n in range(10, -1, -1):
+    print(n)
+
+
+# 3. Escribe un bucle que llame a print() 7 veces para producir este triángulo:
+    #
+    ##
+    ###
+    ####
+    #####
+    ######
+    #######
+h = "#"
+for i in range(1, 8):
+    print(h*i)
+
+# 4. Usa bucles anidados para producir la siguiente salida:
+# # # # # # # #
+# # # # # # # #
+# # # # # # # #
+# # # # # # # #
+# # # # # # # #
+# # # # # # # #
+# # # # # # # #
+# # # # # # # #
+for i in range(8):
+    for j in range(8):
+        print("#", end=" ")
+    print(" ")
+
+# 5. Usando un bucle, produce la siguiente salida:
+#    0 x 0 = 0
+#    1 x 1 = 1
+#    2 x 2 = 4
+#    3 x 3 = 9
+#    4 x 4 = 16
+#    5 x 5 = 25
+#    6 x 6 = 36
+#    7 x 7 = 49
+#    8 x 8 = 64
+#    9 x 9 = 81
+#    10 x 10 = 100
+for i in range(11):
+    print(f"{i} x {i} = {i ** 2}")
+
+# 6. Recorre con for la lista ['Python', 'Numpy','Pandas','Django', 'Flask'] e imprime cada elemento.
+lst = ['Python', 'Numpy', 'Pandas', 'Django', 'Flask']
+for element in lst:
+    print(element)
+
+# 7. Recorre con for de 0 a 100 e imprime todos los números pares.
+for n in range(0, 101, 2):
+    print(n)
+
+# 8. Recorre con for de 0 a 100 e imprime todos los números impares.
+for n in range(1, 101, 2):
+    print(n)
+
+
+# Ejercicios: Nivel 2
+# 1. Usa un for para sumar los números de 0 a 100.
+#    The sum of all numbers is 5050.
+c = 0
+for n in range(101):
+    c += n
+print(f"The sum of all numbers is {c}")
+
+# 2. Usa un for para sumar por separado los impares y los pares de 0 a 100.
+#    The sum of all odd numbers is 2500. And the sum of all even numbers is 2550.
+c_imp = 0
+c_par = 0
+for n in range(101):
+    if n % 2 != 0:
+        c_imp += n
+    else:
+        c_par += n
+print(
+    f"The sum of all odd numbers is {c_imp}. And the sum of all even numbers is {c_par}.")
+
+
+# Ejercicios: Nivel 3
+# 1. Ve a la carpeta data y usa el archivo countries.py. Itera los países y extrae aquellos que contienen la cadena land.
+countries = [
+    'Afghanistan',
+    'Albania',
+    'Algeria',
+    'Andorra',
+    'Angola',
+    'Antigua and Barbuda',
+    'Argentina',
+    'Armenia',
+    'Australia',
+    'Austria',
+    'Azerbaijan',
+    'Bahamas',
+    'Bahrain',
+    'Bangladesh',
+    'Barbados',
+    'Belarus',
+    'Belgium',
+    'Belize',
+    'Benin',
+    'Bhutan',
+    'Bolivia',
+    'Bosnia and Herzegovina',
+    'Botswana',
+    'Brazil',
+    'Brunei',
+    'Bulgaria',
+    'Burkina Faso',
+    'Burundi',
+    'Cabo Verde',
+    'Cambodia',
+    'Cameroon',
+    'Canada',
+    'Central African Republic',
+    'Chad',
+    'Chile',
+    'China',
+    'Colombia',
+    'Comoros',
+    'Congo, Democratic Republic of the',
+    'Congo, Republic of the',
+    'Costa Rica',
+    "Côte d'Ivoire",
+    'Croatia',
+    'Cuba',
+    'Cyprus',
+    'Czech Republic',
+    'Denmark',
+    'Djibouti',
+    'Dominica',
+    'Dominican Republic',
+    'East Timor (Timor-Leste)',
+    'Ecuador',
+    'Egypt',
+    'El Salvador',
+    'Equatorial Guinea',
+    'Eritrea',
+    'Estonia',
+    'Eswatini',
+    'Ethiopia',
+    'Fiji',
+    'Finland',
+    'France',
+    'Gabon',
+    'Gambia',
+    'Georgia',
+    'Germany',
+    'Ghana',
+    'Greece',
+    'Grenada',
+    'Guatemala',
+    'Guinea',
+    'Guinea-Bissau',
+    'Guyana',
+    'Haiti',
+    'Honduras',
+    'Hungary',
+    'Iceland',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Ireland',
+    'Israel',
+    'Italy',
+    'Jamaica',
+    'Japan',
+    'Jordan',
+    'Kazakhstan',
+    'Kenya',
+    'Kiribati',
+    'Korea, North',
+    'Korea, South',
+    'Kuwait',
+    'Kyrgyzstan',
+    'Laos',
+    'Latvia',
+    'Lebanon',
+    'Lesotho',
+    'Liberia',
+    'Libya',
+    'Liechtenstein',
+    'Lithuania',
+    'Luxembourg',
+    'Madagascar',
+    'Malawi',
+    'Malaysia',
+    'Maldives',
+    'Mali',
+    'Malta',
+    'Marshall Islands',
+    'Mauritania',
+    'Mauritius',
+    'Mexico',
+    'Micronesia',
+    'Moldova',
+    'Monaco',
+    'Mongolia',
+    'Montenegro',
+    'Morocco',
+    'Mozambique',
+    'Myanmar',
+    'Namibia',
+    'Nauru',
+    'Nepal',
+    'Netherlands',
+    'New Zealand',
+    'Nicaragua',
+    'Niger',
+    'Nigeria',
+    'North Macedonia',
+    'Norway',
+    'Oman',
+    'Pakistan',
+    'Palau',
+    'Palestine',
+    'Panama',
+    'Papua New Guinea',
+    'Paraguay',
+    'Peru',
+    'Philippines',
+    'Poland',
+    'Portugal',
+    'Qatar',
+    'Romania',
+    'Russia',
+    'Rwanda',
+    'Saint Kitts and Nevis',
+    'Saint Lucia',
+    'Saint Vincent and the Grenadines',
+    'Samoa',
+    'San Marino',
+    'Sao Tome and Principe',
+    'Saudi Arabia',
+    'Senegal',
+    'Serbia',
+    'Seychelles',
+    'Sierra Leone',
+    'Singapore',
+    'Slovakia',
+    'Slovenia',
+    'Solomon Islands',
+    'Somalia',
+    'South Africa',
+    'South Sudan',
+    'Spain',
+    'Sri Lanka',
+    'Sudan',
+    'Suriname',
+    'Sweden',
+    'Switzerland',
+    'Syria',
+    'Tajikistan',
+    'Tanzania',
+    'Thailand',
+    'Togo',
+    'Tonga',
+    'Trinidad and Tobago',
+    'Tunisia',
+    'Turkey',
+    'Turkmenistan',
+    'Tuvalu',
+    'Uganda',
+    'Ukraine',
+    'United Arab Emirates',
+    'United Kingdom',
+    'United States',
+    'Uruguay',
+    'Uzbekistan',
+    'Vanuatu',
+    'Vatican City',
+    'Venezuela',
+    'Vietnam',
+    'Yemen',
+    'Zambia',
+    'Zimbabwe'
+]
+for c in countries:
+    if "land" in c.lower():
+        print(c)
+
+# 2. Dada la lista fruits = ['banana', 'orange', 'mango', 'lemon'], invierte los elementos usando un bucle.
+fruits = ['banana', 'orange', 'mango', 'lemon']
+fruits_reverse = []
+for i in range(len(fruits) - 1, -1, -1):
+    fruits_reverse.append(fruits[i])
+print(fruits_reverse)
+
+# 3. Ve a la carpeta data y usa el archivo countries-data.py.
+#      i. ¿Cuántos idiomas distintos hay en los datos?
+#     ii. ¿Cuál es el idioma usado por más países?
+#    iii. Encuentra los diez países con mayor población.
+[
     {
         "name": "Afghanistan",
         "capital": "Kabul",
@@ -2619,10 +2934,3 @@ countries-data = [
         "currency": "Botswana pula"
     }
 ]
-
-# 3. Ve a la carpeta data y usa el archivo countries-data.py.
-#      i. ¿Cuántos idiomas distintos hay en los datos?
-#     ii. ¿Cuál es el idioma usado por más países?
-#    iii. Encuentra los diez países con mayor población.
-
-for languages in countries-data["languages"]:
