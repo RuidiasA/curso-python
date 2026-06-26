@@ -37,7 +37,7 @@ print(student.keys())
 print(student.values())
 
 # 9. Usa el método items() para convertir el diccionario en una lista de tuplas
-print(student.items())
+print("tuplas: ", student.items())
 
 # 10. Elimina un elemento del diccionario
 print(student.pop("marital status"))
