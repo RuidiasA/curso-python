@@ -168,6 +168,7 @@ def sum_of_even(n):
     return tot
 print(sum_of_even(8))
 
+
 # Ejercicios: Nivel 2
 # 1. Declara una función evens_and_odds que acepte un entero positivo y calcule la cantidad de pares e impares en ese número.
 #       print(evens_and_odds(100))
@@ -198,8 +199,147 @@ def factorial(n):
 print(factorial(5))
 
 # 3. Llama a tu función is_empty que acepte un argumento y verifique si está vacío.
+def is_empty(a):
+    return not a   # 'not a' será True si 'a' está completamente vacío (sea string, lista, dicc, etc.)
+        
+# Pruebas de fuego de nivel profesional:
+print(is_empty(""))      # True (String vacío)
+print(is_empty([]))      # True (Lista vacía)
+print(is_empty({}))      # True (Diccionario vacío)
+print(is_empty("hola"))  # False (Tiene texto)
+print(is_empty([1, 2]))  # False (Tiene elementos)
 
 
 # 4. Escribe distintas funciones que acepten listas y calculen: media, mediana, moda, rango, varianza y desviación estándar.
+def media(l: list):
+    return sum(l) / len(l)
+
+def mediana(l: list):
+    ord_l = sorted(l)
+    n = len(ord_l)
+    if n % 2 == 0:
+        i_izq = (n - 1) // 2
+        i_der = n // 2
+        c = (ord_l[i_izq] + ord_l[i_der]) / 2
+    else:
+        c = ord_l[n // 2]
+    return float(c)
+
+def moda(l: list):
+    numero_moda = l[0]
+    maximo_repeticiones = 0
+    for num in l:
+        conteo_actual = l.count(num)
+        if conteo_actual > maximo_repeticiones:
+            maximo_repeticiones = conteo_actual
+            numero_moda = num
+        
+    return numero_moda
+
+def rango(l):
+    return max(l) - min(l)
+
+def varianza(l):
+    m = sum(l) / len(l)
+    dif_sqrt_acumulada = 0
+    for num in l:
+        dif_sqrt_acumulada += (num - m) ** 2
+    v = dif_sqrt_acumulada / len(l)
+        
+    return v
+
+def desv_standar(f):
+    return f ** 0.5
+    
+print(media([1,4,3,2,5]))
+print(mediana([6,1,4,3,2,5]))
+print(moda([1,2,3,6,7,3,2,5,2,1,2,1,3,5,2,4,1,1,1]))
+print(rango([1,2,6,8,4,3,9,3]))
+print(varianza([1,2,2,4,6]))
+print(desv_standar(varianza([1,2,2,4,6])))
 
 
+#  Ejercicios: Nivel 3
+# 1. Escribe una función is_prime que verifique si un número es primo.
+def is_prime(num):
+    if num <= 1:
+        return False
+    for n in range(2, num):
+        if num % n == 0:
+            return False
+    return True
+        
+print(f"¿Es primo? {is_prime(-11)}")
+
+
+# 2. Escribe una función que verifique si todos los ítems en una lista son únicos.
+def es_unico(l: list):
+    c_elem = set()
+    for element in l:
+        if element not in c_elem:
+            c_elem.add(element)
+        else:
+            return False
+    return True
+    #return len(l) == len(set(l)) <-- Los sets no permiten duplicados, si son del mismo tamaño, entonces todos los items son unicos
+    
+print(es_unico([1,2,3,4,5,2,3]))
+
+# 3. Escribe una función que verifique si todos los ítems en una lista son del mismo tipo de dato.
+def data_type_is_uni(l: list):
+    dat_typ_ref = type(l[0])
+    for element in l:
+        if type(element) != dat_typ_ref:
+            return False
+    return True
+
+print(data_type_is_uni([1,"Alejandro", True, 2,3]))
+
+# 4. Escribe una función que verifique si una variable proporcionada es un nombre de variable válido en Python.
+import keyword
+
+def var_valida(v):
+    if v.isidentifier() and not keyword.iskeyword(v):
+        return True
+    else:
+        return False
+
+# Pruebas de fuego:
+print(var_valida("Hola_Mundo")) # True (Limpio)
+print(var_valida("1_variable")) # False (Empieza con número, detectado por .isidentifier)
+print(var_valida("def"))        # False (Palabra reservada, detectado por keyword)
+
+# 5. Accede al archivo de datos countries-data.py.
+import data.countries_data as cd
+#     Crea una función llamada the_most_spoken_languages que devuelva las 10 o 20 lenguas más habladas en el mundo, ordenadas de mayor a menor.
+def the_most_spoken_languages(n):
+    lang_list = []
+    for country in cd.countries_list:
+        lang_country = country["languages"]
+        for lang in lang_country:
+            lang_list.append(lang)
+    
+    count_lang = dict()
+    for lang in lang_list:
+        if lang not in count_lang:
+            count_lang[lang] = 1
+        else:
+            count_lang[lang] += 1
+    
+    ord_lang = sorted(count_lang.values(), reverse=True)[:n]
+    count_lang_copy = count_lang.copy() 
+    
+    most_spok_lang = dict()
+    for cant in ord_lang:
+        for key, value in list(count_lang_copy.items()):
+            if value == cant:
+                most_spok_lang[key] = cant
+                del count_lang_copy[key]
+                break
+    
+    return most_spok_lang
+
+print(the_most_spoken_languages(20))
+
+
+#     Crea una función llamada the_most_populated_countries que devuelva los 10 o 20 países más poblados del mundo, ordenados de mayor a menor.

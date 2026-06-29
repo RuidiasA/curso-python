@@ -160,12 +160,12 @@ print(max_lang, max_qnt)
 
 #    iii. Encuentra los diez países con mayor población.
 most_pop_countries = []
-for p in cd.countries_list:
+for country in cd.countries_list:
     if len(most_pop_countries) < 10:
-        most_pop_countries.append((p["population"], p["name"]))
+        most_pop_countries.append((country["population"], country["name"]))
         most_pop_countries.sort(reverse=True)
-    elif p["population"] > most_pop_countries[-1][0]:
-        most_pop_countries[-1] = (p["population"], p["name"])
+    elif country["population"] > most_pop_countries[-1][0]:
+        most_pop_countries[-1] = (country["population"], country["name"])
         most_pop_countries.sort(reverse=True)
 
 for rank, (pop, name) in enumerate(most_pop_countries, 1):
