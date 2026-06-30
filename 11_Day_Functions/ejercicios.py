@@ -54,9 +54,9 @@ print(check_season(mes))
 
 # 6. Escribe una función llamada calculate_slope que devuelva la pendiente de una ecuación lineal.
 def calculate_slope(x1, x2, y1, y2):
-    pendiente = (y2-y1)/(x2-x1)
     if x2-x1 == 0:
         return "Error, no se puede dividir entre 0"
+    pendiente = (y2-y1)/(x2-x1)
     
     return pendiente
 
@@ -341,5 +341,18 @@ def the_most_spoken_languages(n):
 
 print(the_most_spoken_languages(20))
 
-
 #     Crea una función llamada the_most_populated_countries que devuelva los 10 o 20 países más poblados del mundo, ordenados de mayor a menor.
+def the_most_populated_countries(n):
+    popu_list = []
+    for country in cd.countries_list:
+        popu_list.append([country["population"], country["name"]])
+        
+    ord_popu_list = sorted(popu_list, reverse=True)[:n]
+    
+    most_popu_countries = {}
+    for popu, name in ord_popu_list:
+        most_popu_countries[name] = popu
+        
+    return most_popu_countries
+
+print(the_most_populated_countries(10))

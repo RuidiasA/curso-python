@@ -16,7 +16,7 @@ def the_most_spoken_languages(n):
             count_lang[lang] += 1
     
     ord_lang = sorted(count_lang.values(), reverse=True)[:n]
-    count_lang_copy = count_lang.copy()
+    count_lang_copy = count_lang.copy() 
     
     most_spok_lang = dict()
     for cant in ord_lang:
@@ -31,3 +31,17 @@ def the_most_spoken_languages(n):
 print(the_most_spoken_languages(20))
 
 #     Crea una función llamada the_most_populated_countries que devuelva los 10 o 20 países más poblados del mundo, ordenados de mayor a menor.
+def the_most_populated_countries(n):
+    popu_list = []
+    for country in cd.countries_list:
+        popu_list.append([country["population"], country["name"]])
+        
+    ord_popu_list = sorted(popu_list, reverse=True)[:n]
+    
+    most_popu_countries = {}
+    for popu, name in ord_popu_list:
+        most_popu_countries[name] = popu
+        
+    return most_popu_countries
+
+print(the_most_populated_countries(10))
