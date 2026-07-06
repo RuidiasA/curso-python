@@ -7,39 +7,27 @@ names = ['Asabeneh', 'Lidiya', 'Ermias', 'Abraham']
 # 6. Imprime cada número de la lista numbers usando un bucle for.
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-# Ejercicios: Intermedio
-# 1. Usa map para convertir cada país en countries a mayúsculas y genera una nueva lista.
-countries_upper = list(map(lambda c : c.upper(), countries))
-print(countries_upper)
-
-# 2. Usa map para elevar al cuadrado cada número en numbers y genera una nueva lista.
-pow_num = list(map(lambda n : n ** 2, numbers))
-print(pow_num)
-
-# 3. Usa map para convertir cada nombre en names a mayúsculas y genera una nueva lista.
-names_upper = list(map(lambda n : n.upper(), names))
-print(names_upper)
-
-# 4. Usa filter para filtrar países que contienen 'land'.
-land_filt = list(filter(lambda c : "land" in c, countries))
-print(land_filt)
-
-# 5. Usa filter para filtrar países con exactamente seis caracteres.
-count_6 = list(filter(lambda c : len(c) == 6, countries))
-print(count_6)
-
-# 6. Usa filter para filtrar países con seis o más caracteres.
-count_m6 = list(filter(lambda c : len(c) >= 6, countries))
-print(count_m6)
-
-# 7. Usa filter para filtrar países que comienzan con 'E'.
-cont_e = list(filter(lambda c : c[0] == "E", countries))
-print(cont_e)
-
-# 8. Encadena dos o más iteradores de lista (por ejemplo arr.map(callback).filter(callback).reduce(callback)).
+from functools import reduce
+import data.countries as dc
 
 
-# 9. Declara una función get_string_lists que reciba una lista y devuelva una lista con solo los countrieos de tipo cadena.
+# 13. Crea una función que devuelva un diccionario donde las claves sean la primera letra de los nombres de país y el valor sea el número de países que comienzan con esa letra.
+def count_countries_by_letter(country_list: list):
+    def update_letter_counts(letter_counts, country):
+        first_letter = country[0]
+        
+        if first_letter not in letter_counts:
+            letter_counts[first_letter] = 1
+        else:
+            letter_counts[first_letter] += 1
+            
+        return letter_counts
+    
+    return reduce(update_letter_counts, country_list, {})
+
+print(count_countries_by_letter(dc.countries))
+
+# 14. Declara una función get_first_ten_countries que devuelva los primeros diez países de la lista countries.js en la carpeta data.
 
 
-# 10. Usa reduce para sumar todos los números en la lista numbers.
+# 15. Declara una función get_last_ten_countries que devuelva los últimos diez países de la lista.

@@ -2,14 +2,14 @@
 # Ejercicios: Básico
 # 1. Explica la diferencia entre map, filter y reduce.
 """
-map es una funcion integrada que recibe una funcion y un iterable como parametros, nos permite aplicar una funcion a cada countrieo de un objeto iterable sin necesidad de usar bucles
-map: Transforma todos los countrieos de un iterable (Entran N countrieos, salen N countrieos modificados).
+map es una funcion integrada que recibe una funcion y un iterable como parametros, nos permite aplicar una funcion a cada elemento de un objeto iterable sin necesidad de usar bucles
+map: Transforma todos los elementos de un iterable (Entran N elementos, salen N elementos modificados).
 
-filter es una función que recibe otra función (la cual devuelve un booleano) para filtrar un iterable, devolviendo un nuevo iterable solo con los countrieos que dieron True". 
-filter: Selecciona countrieos basados en una condición lógica (Entran N countrieos, sale una cantidad menor o igual a N).
+filter es una función que recibe otra función (la cual devuelve un booleano) para filtrar un iterable, devolviendo un nuevo iterable solo con los elementos que dieron True". 
+filter: Selecciona elementos basados en una condición lógica (Entran N elementos, sale una cantidad menor o igual a N).
 
-reduce es una funcion que devuelve un valor acumulado, reduce no opera de golpe, sino que aplica la función en parejas de countrieos, de izquierda a derecha, hasta que solo queda un único valor.
-reduce: Combina/Acumula todos los countrieos en cadena hasta colapsarlos en un solo valor final.
+reduce es una funcion que devuelve un valor acumulado, reduce no opera de golpe, sino que aplica la función en parejas de elementos, de izquierda a derecha, hasta que solo queda un único valor.
+reduce: Combina/Acumula todos los elementos en cadena hasta colapsarlos en un solo valor final.
 """
 
 # 2. Explica la diferencia entre funciones de orden superior, closures y decoradores.
@@ -83,28 +83,59 @@ count_6 = list(filter(lambda c : len(c) == 6, countries))
 print(count_6)
 
 # 6. Usa filter para filtrar países con seis o más caracteres.
-
+count_m6 = list(filter(lambda c : len(c) >= 6, countries))
+print(count_m6)
 
 # 7. Usa filter para filtrar países que comienzan con 'E'.
-
+cont_e = list(filter(lambda c : c.startswith("E"), countries))
+print(cont_e)
 
 # 8. Encadena dos o más iteradores de lista (por ejemplo arr.map(callback).filter(callback).reduce(callback)).
+cad = list(map(lambda e : e ** 2 ,filter(lambda n : n % 2 ==0, numbers)))
+print(cad)
 
+# 9. Declara una función get_string_lists que reciba una lista y devuelva una lista con solo los elementos de tipo cadena.
+def get_string_lists(l: list):
+    str_elem = list(filter(lambda s : isinstance(s, str), l))
+    return str_elem
 
-# 9. Declara una función get_string_lists que reciba una lista y devuelva una lista con solo los countrieos de tipo cadena.
-
+print(get_string_lists(["Perú", 23, "Argentina", True, 3.5, "Brasil"]))
 
 # 10. Usa reduce para sumar todos los números en la lista numbers.
+from functools import reduce
 
+sum_num = reduce(lambda n1, n2 : n1 + n2, numbers)
+print(sum_num)
 
 # 11. Usa reduce para concatenar todos los países en una oración: Estonia, Finland, Sweden, Denmark, Norway, and Iceland are north European countries.
-
+first_count = reduce(lambda acc, c: f"{acc}, {c}", countries[:-1])
+sentence = f"{first_count} and {countries[-1]} are north European countries."
+print(sentence)
 
 # 12. Declara una función categorize_countries que retorne una lista de países que siguen un patrón común (puedes ver la lista de países en el archivo countries.js del repositorio, por ejemplo 'land', 'ia', 'island', 'stan').
+import data.countries as dc
 
+def categorize_countries(l: list):
+    land_countries = list(filter(lambda c : "land" in c, l))
+    return land_countries
+
+print(categorize_countries(dc.countries))
 
 # 13. Crea una función que devuelva un diccionario donde las claves sean la primera letra de los nombres de país y el valor sea el número de países que comienzan con esa letra.
+def count_countries_by_letter(country_list: list):
+    def update_letter_counts(letter_counts, country):
+        first_letter = country[0]
+        
+        if first_letter not in letter_counts:
+            letter_counts[first_letter] = 1
+        else:
+            letter_counts[first_letter] += 1
+            
+        return letter_counts
+    
+    return reduce(update_letter_counts, country_list, {})
 
+print(count_countries_by_letter(dc.countries))
 
 # 14. Declara una función get_first_ten_countries que devuelva los primeros diez países de la lista countries.js en la carpeta data.
 
