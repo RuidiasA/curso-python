@@ -1,33 +1,56 @@
-# 4. Imprime cada país de la lista countries usando un bucle for.
-countries = ['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland']
+# Ejercicios: Avanzado
+# Usando el archivo countries_data.py (https://github.com/Asabeneh/30-Days-Of-Python/blob/master/data/countries-data.py), completa lo siguiente:
+#   Ordena los países por nombre, capital y población.
 
-# 5. Imprime cada nombre de la lista names usando un bucle for.
-names = ['Asabeneh', 'Lidiya', 'Ermias', 'Abraham']
+import data.countries_data as cd
 
-# 6. Imprime cada número de la lista numbers usando un bucle for.
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-from functools import reduce
-import data.countries as dc
-
-
-# 13. Crea una función que devuelva un diccionario donde las claves sean la primera letra de los nombres de país y el valor sea el número de países que comienzan con esa letra.
-def count_countries_by_letter(country_list: list):
-    def update_letter_counts(letter_counts, country):
-        first_letter = country[0]
-        
-        if first_letter not in letter_counts:
-            letter_counts[first_letter] = 1
-        else:
-            letter_counts[first_letter] += 1
-            
-        return letter_counts
+def order(l: list, filt):
+    filt_list = map(lambda country : {
+        "name" : country["name"], 
+        "capital" : country["capital"], 
+        "population" : country["population"]
+    }, l)
     
-    return reduce(update_letter_counts, country_list, {})
+    return sorted(filt_list, key= lambda country : country[filt])
 
-print(count_countries_by_letter(dc.countries))
+ord_list = order(cd.countries_list, "name")
 
-# 14. Declara una función get_first_ten_countries que devuelva los primeros diez países de la lista countries.js en la carpeta data.
+for country in ord_list:
+    print(country)
+
+#   Ordena y obtiene los diez idiomas más usados.
+from functools import reduce
+
+def order_lang(l: list):
+    lang_list = []
+    for country in l:
+        for lang in country["languages"]:
+            lang_list.append(lang)
+            
+    def count_lang(acc, language):
+        if language not in acc:
+            acc[language] = 1
+        else:
+            acc[language] +=1
+        
+        return acc
+    
+    count_dict = reduce(count_lang, lang_list, {})
+    most_spok_lang = sorted(count_dict.items(), key= lambda x : x[1], reverse=True)
+            
+    return most_spok_lang[:10]
+
+print(order_lang(cd.countries_list))
+
+#   Ordena y obtiene los diez países con mayor población.
+def order(l: list):
+    filt_list = map(lambda country : {"name" : country["name"], "population" : country["population"]}, l)
+    
+    return sorted(filt_list, key= lambda country : country["population"], reverse=True)
+
+ord_list = order(cd.countries_list)[:10]
+
+for country in ord_list:
+    print(country)
 
 
-# 15. Declara una función get_last_ten_countries que devuelva los últimos diez países de la lista.
