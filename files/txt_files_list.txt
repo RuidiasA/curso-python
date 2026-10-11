@@ -1,0 +1,8 @@
+donald_speech.txt
+melina_trump_speech.txt
+michelle_obama_speech.txt
+obama_speech.txt
+py_files_list.txt
+reading_file_example.txt
+txt_files_list.txt
+writing_file_example.txt
