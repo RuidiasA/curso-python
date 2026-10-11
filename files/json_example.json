@@ -1,0 +1,10 @@
+{
+    "name": "Mark Firenze",
+    "country": "Spain",
+    "city": "Madrid",
+    "skills": [
+        "JavaScript",
+        "React",
+        "Python"
+    ]
+}
