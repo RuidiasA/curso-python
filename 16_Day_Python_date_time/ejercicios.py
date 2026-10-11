@@ -66,6 +66,7 @@ print("t3 =", t3)
 # 1. Obtén el día, mes, año, hora, minuto y timestamp actuales desde el módulo datetime.
 now = datetime.now()
 print(now)
+print(now.timestamp())
 
 # 2. Formatea la fecha actual con el formato: "%m/%d/%Y, %H:%M:%S"
 f = now.strftime("%m/%d/%Y, %H:%M:%S")
@@ -88,4 +89,7 @@ today = datetime(year=2026, month=10, day=11)
 diff = today - day
 print(diff)
 
-print(now.timestamp())
+# 6. Piensa: ¿para qué puedes usar el módulo datetime? Por ejemplo:
+#    Análisis de series temporales
+#    Obtener timestamps para eventos en una aplicación
+#    Añadir la fecha de publicación en un blog

@@ -1,56 +1,68 @@
-# Ejercicios: Avanzado
-# Usando el archivo countries_data.py (https://github.com/Asabeneh/30-Days-Of-Python/blob/master/data/countries-data.py), completa lo siguiente:
-#   Ordena los países por nombre, capital y población.
-
+# 1. Crea en countries.py funciones que usen los datos de countries_data.py:
+#    una función para encontrar los 10 idiomas más usados
 import data.countries_data as cd
 
-def order(l: list, filt):
-    filt_list = map(lambda country : {
-        "name" : country["name"], 
-        "capital" : country["capital"], 
-        "population" : country["population"]
-    }, l)
+def most_used_langs(n):
+    count_lang = {}
     
-    return sorted(filt_list, key= lambda country : country[filt])
-
-ord_list = order(cd.countries_list, "name")
-
-for country in ord_list:
-    print(country)
-
-#   Ordena y obtiene los diez idiomas más usados.
-from functools import reduce
-
-def order_lang(l: list):
-    lang_list = []
-    for country in l:
-        for lang in country["languages"]:
-            lang_list.append(lang)
-            
-    def count_lang(acc, language):
-        if language not in acc:
-            acc[language] = 1
-        else:
-            acc[language] +=1
+    for country in cd.countries_list:
+        try:
+            lang_country = country["languages"]
+            for lang in lang_country:
+                if lang not in count_lang:
+                    count_lang[lang] = 1
+            else:
+                count_lang[lang] += 1
+        except KeyError:
+            continue
         
-        return acc
+    sorted_langs = sorted(count_lang.items(), key=lambda item: item[1], reverse=True)
+    top_langs = sorted_langs[:n]
+        
+    return top_langs
     
-    count_dict = reduce(count_lang, lang_list, {})
-    most_spok_lang = sorted(count_dict.items(), key= lambda x : x[1], reverse=True)
-            
-    return most_spok_lang[:10]
+print(most_used_langs(10))
 
-print(order_lang(cd.countries_list))
-
-#   Ordena y obtiene los diez países con mayor población.
-def order(l: list):
-    filt_list = map(lambda country : {"name" : country["name"], "population" : country["population"]}, l)
+#    una función para encontrar los 10 países más poblados
+def most_pop_countries(n):
+    country_name_lst = []
+    country_population_lst = []
+    most_pop_countries_list = []
     
-    return sorted(filt_list, key= lambda country : country["population"], reverse=True)
+    for country in cd.countries_list:
+        try:
+            country_name_lst.append(country["name"])
+            country_population_lst.append(country["population"])
+        except KeyError:
+            continue
+        
+    for name, population in zip(country_name_lst, country_population_lst):
+                most_pop_countries_list.append({"Pais":name, "Poblacion":population})
+                
+    sorted_pop = sorted(most_pop_countries_list, key= lambda item: item["Poblacion"] , reverse=True)
+    top_pop = sorted_pop[:n]
+    
+    return top_pop
+        
+print(most_pop_countries(10))
 
-ord_list = order(cd.countries_list)[:10]
 
-for country in ord_list:
-    print(country)
+# Version Optimizada
+def most_pop_countries_opt(cant):
+    countries_data = []
+    
+    for country in cd.countries_list:
+        try:
+            countries_data.append({
+                "Pais": country["name"],
+                "Poblacion": country["population"]
+            })
+        except KeyError:
+            continue
+    
+    sorted_pop = sorted(countries_data, key=lambda item: item["Poblacion"], reverse=True)
+    top_pop = sorted_pop[:cant]
+    
+    return top_pop
 
-
+print(most_pop_countries_opt(10))
